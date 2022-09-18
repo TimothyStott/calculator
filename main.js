@@ -4,6 +4,7 @@ let calcObj = {
     num2: undefined,
     operator: undefined,
     total: undefined,
+    totalRetured: false,
 }
 
 
@@ -19,37 +20,82 @@ This section holds the mathmatical functions
 //take two numbers and an opertaor 
 //run correct calculation and return
 function runCalculation(){
-    alert("Test");
+    const textBox = document.querySelector(".textArea");
+
+    switch(calcObj.operator){
+    case "+":
+        calcObj.total=add(parseCorrectly(calcObj.num1),parseCorrectly(calcObj.num2));
+        textBox.textContent=calcObj.total;
+        calcObj.totalRetured = true;
+        break;
+    case "-":
+        calcObj.total=subtract(parseCorrectly(calcObj.num1),parseCorrectly(calcObj.num2));
+        textBox.textContent=calcObj.total;
+        calcObj.operator=undefined;
+        calcObj.totalRetured = true;
+        break;
+    case "x":
+        calcObj.total=multiply(parseCorrectly(calcObj.num1),parseCorrectly(calcObj.num2));
+        textBox.textContent=calcObj.total;
+        calcObj.operator=undefined;
+        calcObj.totalRetured = true;
+        break;
+    case "÷":
+        calcObj.total=divide(parseCorrectly(calcObj.num1),parseCorrectly(calcObj.num2));
+        textBox.textContent=calcObj.total;
+        calcObj.operator=undefined;
+        calcObj.totalRetured = true;
+        break;
+    }
 }
 
 //add function
-
+function add(a,b){
+    return a + b;
+}
 
 //subtract function
-
+function subtract(a,b){
+    return a-b;
+}
 
 //multiply function
-
+function multiply(a,b){
+    return a*b;
+}
 
 //divide function
-
+function divide(a,b){
+    return a/b;
+}
 
 //function for updating logic
 function updateObject(){
     const textBox = document.querySelector(".textArea");
-    const display = document.querySelector(".display");
     if(calcObj.operator == undefined){
         calcObj.num1 = textBox.textContent;
     }
     else{
         calcObj.num2 = textBox.textContent;
     }
-
-    if(calcObj.operator != undefined){
-        display.textContent = calcObj.num1 + " " + calcObj.operator;
-    }
+    
 }
 
+
+//function for parsing correctly
+function parseCorrectly(toBeParsed){
+    if(toBeParsed==""){
+        return 0;
+    }
+    
+    for (let i =0;i<toBeParsed.length;i++){
+        if(toBeParsed[i]=="."){
+            return parseFloat(toBeParsed);
+        }
+    }
+
+    return parseInt(toBeParsed);
+}
 
 /*
 --------------------------------------------------
@@ -131,18 +177,23 @@ function addPeriodToTextAreaClick(){
 //function to add operator
 function updateOperatorClick(e){
     const textBox = document.querySelector(".textArea");
+    const display = document.querySelector(".display");
     switch(e.target.textContent){
         case "÷":
             calcObj.operator = "÷";
+            display.textContent = calcObj.num1 + " " + calcObj.operator;
             break;
         case "x":
             calcObj.operator = "x";
+            display.textContent = calcObj.num1 + " " + calcObj.operator;
             break;
         case "-":
             calcObj.operator = "-";
+            display.textContent = calcObj.num1 + " " + calcObj.operator;
             break;
         case "+":
             calcObj.operator = "+";
+            display.textContent = calcObj.num1 + " " + calcObj.operator;
             break;
     }
     textBox.textContent = "";
@@ -151,7 +202,9 @@ function updateOperatorClick(e){
 
 //function for equal click
 function equalsClicked(){
+    const display = document.querySelector(".display");
     if(calcObj.num1 != undefined && calcObj.num2 != "" && calcObj.operator!=undefined){
+        display.textContent = display.textContent + " " + calcObj.num2;
         runCalculation();
     }
 }

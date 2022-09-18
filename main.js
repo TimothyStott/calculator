@@ -21,29 +21,36 @@ This section holds the mathmatical functions
 //run correct calculation and return
 function runCalculation(){
     const textBox = document.querySelector(".textArea");
+    const history = document.querySelector(".history")
+    const display = document.querySelector(".display");
 
     switch(calcObj.operator){
     case "+":
         calcObj.total=add(parseCorrectly(calcObj.num1),parseCorrectly(calcObj.num2));
         textBox.textContent=calcObj.total;
+        history.innerHTML= history.innerHTML + "<br />" + display.textContent + " " + "=" + " " + textBox.textContent;
         calcObj.operator=undefined;
         calcObj.totalRetured = true;
         break;
     case "-":
         calcObj.total=subtract(parseCorrectly(calcObj.num1),parseCorrectly(calcObj.num2));
         textBox.textContent=calcObj.total;
+        history.innerHTML= history.innerHTML + "<br />" + display.textContent + " " + "=" + " " + textBox.textContent;
         calcObj.operator=undefined;
         calcObj.totalRetured = true;
         break;
     case "x":
         calcObj.total=multiply(parseCorrectly(calcObj.num1),parseCorrectly(calcObj.num2));
         textBox.textContent=calcObj.total;
+        history.innerHTML= history.innerHTML + "<br />" + display.textContent + " " + "=" + " " + textBox.textContent;
         calcObj.operator=undefined;
         calcObj.totalRetured = true;
         break;
     case "÷":
         calcObj.total=divide(parseCorrectly(calcObj.num1),parseCorrectly(calcObj.num2));
         textBox.textContent=calcObj.total;
+        history.innerHTML= history.innerHTML + "<br />" + display.textContent + " " + "=" + " " + textBox.textContent;
+        console.log(history.textContent);
         calcObj.operator=undefined;
         calcObj.totalRetured = true;
         break;
@@ -127,7 +134,7 @@ function clearTextArea(){
 //swap positive negative 
 function swapPosNeg(){
     const textBox = document.querySelector(".textArea");
-    if(textBox.textContent.length>1 && textBox.textContent[0]!="-"){
+    if(textBox.textContent.length>0 && textBox.textContent[0]!="-"){
         textBox.textContent = "-" + textBox.textContent;
     }
 

@@ -26,6 +26,16 @@ html, body {
     max-width: 430px;
 }
 
+.history{
+    padding-top: 10px;
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    width: 430px;
+    max-width: 430px;
+    grid-column: 1 / span 4;
+}
+
 .mainContainer{
     margin: 0 auto 0 auto;
     width: 250px;

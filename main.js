@@ -18,7 +18,9 @@ This section holds the mathmatical functions
 //main function to make calc work
 //take two numbers and an opertaor 
 //run correct calculation and return
-
+function runCalculation(){
+    alert("Test");
+}
 
 //add function
 
@@ -32,6 +34,21 @@ This section holds the mathmatical functions
 //divide function
 
 
+//function for updating logic
+function updateObject(){
+    const textBox = document.querySelector(".textArea");
+    const display = document.querySelector(".display");
+    if(calcObj.operator == undefined){
+        calcObj.num1 = textBox.textContent;
+    }
+    else{
+        calcObj.num2 = textBox.textContent;
+    }
+
+    if(calcObj.operator != undefined){
+        display.textContent = calcObj.num1 + " " + calcObj.operator;
+    }
+}
 
 
 /*
@@ -46,7 +63,9 @@ This section holds functions for each button
 //clears operators and all numbers if necessary
 function clearAll(){
     const textBox = document.querySelector(".textArea");
+    const display = document.querySelector(".display");
     textBox.innerHTML = "";
+    display.innerHTML = "";
     calcObj.num1 = undefined;
     calcObj.num2 = undefined;
     calcObj.operator = undefined;
@@ -110,16 +129,30 @@ function addPeriodToTextAreaClick(){
 
 
 //function to add operator
-
-//function for updating logic
-function updateObject(){
+function updateOperatorClick(e){
     const textBox = document.querySelector(".textArea");
-    const display = document.querySelector(".display");
-    if(calcObj.operator == undefined){
-        calcObj.num1 = textBox.textContent;
+    switch(e.target.textContent){
+        case "÷":
+            calcObj.operator = "÷";
+            break;
+        case "x":
+            calcObj.operator = "x";
+            break;
+        case "-":
+            calcObj.operator = "-";
+            break;
+        case "+":
+            calcObj.operator = "+";
+            break;
     }
-    else{
-        calcObj.num2 = textBox.textContent;
+    textBox.textContent = "";
+}
+
+
+//function for equal click
+function equalsClicked(){
+    if(calcObj.num1 != undefined && calcObj.num2 != "" && calcObj.operator!=undefined){
+        runCalculation();
     }
 }
 
@@ -149,9 +182,13 @@ const numberButtons = document.querySelectorAll(".numberButton");
 numberButtons.forEach(numBtn => numBtn.addEventListener('click',addNumberToTextAreaClick));
 
 //add event listener for operator buttons click
+const operatorButtons = document.querySelectorAll(".operatorButton");
+operatorButtons.forEach(opBtn => opBtn.addEventListener('click', updateOperatorClick));
 
 
-//add event listener for equals
+//add event listener for equals click
+const equalButton = document.querySelector(".equalsButton");
+equalButton.addEventListener('click', equalsClicked);
 
 //add event listener for numeric keys
 

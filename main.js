@@ -26,6 +26,7 @@ function runCalculation(){
     case "+":
         calcObj.total=add(parseCorrectly(calcObj.num1),parseCorrectly(calcObj.num2));
         textBox.textContent=calcObj.total;
+        calcObj.operator=undefined;
         calcObj.totalRetured = true;
         break;
     case "-":
@@ -139,6 +140,10 @@ function swapPosNeg(){
 //function to add number to text area via mouse click
 function addNumberToTextAreaClick(e){
     const textBox = document.querySelector(".textArea");
+    if(calcObj.totalRetured){
+        textBox.textContent= "";
+        calcObj.totalRetured = false;
+    }
     switch(e.target.textContent){
         case "0":            
             if(textBox.textContent.length<9 && textBox.textContent.length > 0){

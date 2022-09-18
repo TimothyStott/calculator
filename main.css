@@ -1,0 +1,53 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family:  Helvetica, sans-serif;
+}
+
+.textArea{
+    text-align: right;
+}
+
+.mainContainer{
+    margin: 0 auto 0 auto;
+    padding: 0 300px 0 300px;
+    width: 250px;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+}
+
+.textArea{
+    grid-column: 1 / span 4;
+}
+
+
+.greyButton{
+    background-color: rgba(49,49,49,255);
+    color: rgba(253,253,253,255);
+}
+
+.zeroButton {
+    grid-column: 1 / span 2;
+    width: 200px;
+    background-color: rgba(49,49,49,255);
+    color: rgba(253,253,253,255);
+}
+
+.lightGreyButton{
+    background-color: rgba(160,160,160,255);
+}
+
+.orangeButton{
+    background-color: rgba(246,154,6,255);
+    color: rgba(253,253,253,255);
+}
+
+button{
+    display: block;
+    width: auto;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    margin: 5px 3px 5px 3px;
+}

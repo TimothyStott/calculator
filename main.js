@@ -3,6 +3,7 @@ let calcObj = {
     num1: undefined,
     num2: undefined,
     operator: undefined,
+    total: undefined,
 }
 
 
@@ -52,7 +53,6 @@ function clearAll(){
 }
 
 //Clear function
-//just deletes the text area
 function clearTextArea(){
     const textBox = document.querySelector(".textArea");
     textBox.innerHTML = "";
@@ -72,14 +72,56 @@ function swapPosNeg(){
 }
 
 //function to add number to text area via mouse click
-
+function addNumberToTextAreaClick(e){
+    const textBox = document.querySelector(".textArea");
+    switch(e.target.textContent){
+        case "0":            
+            if(textBox.textContent.length<9 && textBox.textContent.length > 0){
+                textBox.textContent = textBox.textContent + e.target.textContent;
+            }
+            break;
+        default:
+            if(textBox.textContent.length<9){
+                textBox.textContent = textBox.textContent + e.target.textContent;
+            }            
+}}
 
 //function to add number to text area via keyboard press
 
 
+//function to add period
+function addPeriodToTextAreaClick(){
+    let dotExists = false;
+    const textBox = document.querySelector(".textArea");
+
+    for (let i = 0; i<textBox.textContent.length; i++){
+        if(textBox.textContent[i]=="."){
+            dotExists = true;
+        }
+    }
+    
+    if(textBox.textContent.length<8 && !dotExists){
+        textBox.textContent = textBox.textContent + ".";
+    }
+
+}
+
+//function to add period via keyboard
+
+
 //function to add operator
 
-
+//function for updating logic
+function updateObject(){
+    const textBox = document.querySelector(".textArea");
+    const display = document.querySelector(".display");
+    if(calcObj.operator == undefined){
+        calcObj.num1 = textBox.textContent;
+    }
+    else{
+        calcObj.num2 = textBox.textContent;
+    }
+}
 
 /*
 --------------------------------------------------
@@ -100,9 +142,14 @@ textAreaClearButton.addEventListener('click', clearTextArea);
 
 //Add event listener for swap post/neg
 const swapPosNegButton = document.querySelector("#swapPosNeg");
-swapPosNegButton.addEventListener('click',swapPosNeg)
+swapPosNegButton.addEventListener('click',swapPosNeg);
 
-//add event listener for operators
+//add event listener for numeric click
+const numberButtons = document.querySelectorAll(".numberButton");
+numberButtons.forEach(numBtn => numBtn.addEventListener('click',addNumberToTextAreaClick));
+
+//add event listener for operator buttons click
+
 
 //add event listener for equals
 
@@ -110,9 +157,12 @@ swapPosNegButton.addEventListener('click',swapPosNeg)
 
 //add event listener for period
 
+//add event listener for period
+const dotButton = document.querySelector(".dotButton");
+dotButton.addEventListener('click', addPeriodToTextAreaClick);
 
 
-
-
+//main window click event listener
+document.addEventListener('click', updateObject);
 //useful snippets for later
 //console.log(textBox.textContent.length);

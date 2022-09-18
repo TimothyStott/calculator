@@ -8,13 +8,22 @@ html, body {
     font-size: 24px;
 }
 
+.display{
+    height: 30px;
+    padding-top: 100px;
+    color: lightgray;
+    font-style: italic;
+    grid-column: 1 / span 4;
+}
+
 .textArea{
     text-align: right;
-    padding: 100px 0px 10px 0px;
+    padding: 0px 0px 10px 0px;
     color: white;
     font-size: 70px;
     min-height: 80px;
     width: 430px;
+    max-width: 430px;
 }
 
 .mainContainer{
@@ -24,7 +33,7 @@ html, body {
     grid-template-columns: repeat(4, auto);
 }
 
-.textArea{
+.textArea {
     grid-column: 1 / span 4;
 }
 

@@ -107,7 +107,7 @@ function parseCorrectly(toBeParsed){
 
 /*
 --------------------------------------------------
-Click/Mouse Key Operation functions
+Click/Key Press Key Operation functions
 This section holds functions for each button
 --------------------------------------------------
 */
@@ -164,7 +164,23 @@ function addNumberToTextAreaClick(e){
 }}
 
 //function to add number to text area via keyboard press
-
+function addNumberToTextAreaKeyPress(numToAdd){
+    const textBox = document.querySelector(".textArea");
+    if(calcObj.totalRetured){
+        textBox.textContent= "";
+        calcObj.totalRetured = false;
+    }
+    switch(numToAdd){
+        case "0":            
+            if(textBox.textContent.length<9 && textBox.textContent.length > 0){
+                textBox.textContent = textBox.textContent + numToAdd;
+            }
+            break;
+        default:
+            if(textBox.textContent.length<9){
+                textBox.textContent = textBox.textContent + numToAdd;
+            }            
+}};
 
 //function to add period
 function addPeriodToTextAreaClick(){
@@ -183,10 +199,8 @@ function addPeriodToTextAreaClick(){
 
 }
 
-//function to add period via keyboard
 
-
-//function to add operator
+//function to add operator click
 function updateOperatorClick(e){
     const textBox = document.querySelector(".textArea");
     const display = document.querySelector(".display");
@@ -211,6 +225,32 @@ function updateOperatorClick(e){
     textBox.textContent = "";
 }
 
+//function to add operator via keyboard
+function updateOperatorKeyPress(keyPressed){
+
+    const textBox = document.querySelector(".textArea");
+    const display = document.querySelector(".display");
+    switch(keyPressed){       
+        case "÷":
+            calcObj.operator = "/";
+            display.textContent = calcObj.num1 + " " + calcObj.operator;
+            break;
+        case "x":
+            calcObj.operator = "*";
+            display.textContent = calcObj.num1 + " " + calcObj.operator;
+            break;
+        case "-":
+            calcObj.operator = "-";
+            display.textContent = calcObj.num1 + " " + calcObj.operator;
+            break;
+        case "+":
+            calcObj.operator = "+";
+            display.textContent = calcObj.num1 + " " + calcObj.operator;
+            break;
+    }
+    textBox.textContent = "";
+}
+
 
 //function for equal click
 function equalsClicked(){
@@ -219,6 +259,27 @@ function equalsClicked(){
         display.textContent = display.textContent + " " + calcObj.num2;
         runCalculation();
     }
+}
+
+
+//Check Key Function
+function checkKey(e){
+    if (parseInt(e.key)>=0&&parseInt(e.key)<=9){
+        addNumberToTextAreaKeyPress(e.key);
+        updateObject();
+    }
+    if(e.key=="."){
+        addPeriodToTextAreaClick();
+        updateObject();
+    }
+    if(e.key==="+"||e.key==="-"||e.key==="/"||e.key==="*"){
+        updateObject();
+        updateOperatorKeyPress(e.key);
+    }
+    if(e.key==="Enter"||e.key==="="){
+        equalsClicked();
+    }
+
 }
 
 /*
@@ -255,16 +316,12 @@ operatorButtons.forEach(opBtn => opBtn.addEventListener('click', updateOperatorC
 const equalButton = document.querySelector(".equalsButton");
 equalButton.addEventListener('click', equalsClicked);
 
-//add event listener for numeric keys
-
-//add event listener for period
-
 //add event listener for period
 const dotButton = document.querySelector(".dotButton");
 dotButton.addEventListener('click', addPeriodToTextAreaClick);
 
-
 //main window click event listener
 document.addEventListener('click', updateObject);
-//useful snippets for later
-//console.log(textBox.textContent.length);
+
+//event listener for key strokes
+window.addEventListener('keydown', checkKey)

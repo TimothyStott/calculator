@@ -202,6 +202,7 @@ function addPeriodToTextAreaClick(){
 
 //function to add operator click
 function updateOperatorClick(e){
+    if(calcObj.num1!="" && calcObj.num1!= undefined){
     const textBox = document.querySelector(".textArea");
     const display = document.querySelector(".display");
     switch(e.target.textContent){
@@ -223,11 +224,11 @@ function updateOperatorClick(e){
             break;
     }
     textBox.textContent = "";
-}
+}}
 
 //function to add operator via keyboard
 function updateOperatorKeyPress(keyPressed){
-
+    if(calcObj.num1!=""&&calcObj.num1!=undefined){
     const textBox = document.querySelector(".textArea");
     const display = document.querySelector(".display");
     switch(keyPressed){       
@@ -248,6 +249,7 @@ function updateOperatorKeyPress(keyPressed){
             display.textContent = calcObj.num1 + " " + calcObj.operator;
             break;
     }
+}
     textBox.textContent = "";
 }
 

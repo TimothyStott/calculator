@@ -231,12 +231,12 @@ function updateOperatorKeyPress(keyPressed){
     const textBox = document.querySelector(".textArea");
     const display = document.querySelector(".display");
     switch(keyPressed){       
-        case "÷":
-            calcObj.operator = "/";
+        case "/":
+            calcObj.operator = "÷";
             display.textContent = calcObj.num1 + " " + calcObj.operator;
             break;
-        case "x":
-            calcObj.operator = "*";
+        case "*":
+            calcObj.operator = "x";
             display.textContent = calcObj.num1 + " " + calcObj.operator;
             break;
         case "-":

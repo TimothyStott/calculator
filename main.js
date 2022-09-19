@@ -249,8 +249,9 @@ function updateOperatorKeyPress(keyPressed){
             display.textContent = calcObj.num1 + " " + calcObj.operator;
             break;
     }
-}
+
     textBox.textContent = "";
+}
 }
 
 
